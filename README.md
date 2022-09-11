@@ -1,8 +1,18 @@
+# This fork info
+This is just extension to the original repo (https://github.com/sd-webui/stable-diffusion-webui), to allow running the same seed with different amount of steps automatically. Sharing in case someone else might find it useful, but at least basic knowledge of Python is probably needed.
+
+For use see: `use_loopgen.py`
+
+The other relevant file is: `loopgen.py` where defaults and the actual implementation is. Note this is just quickly glued together code, so quality is not the best.
+
+If you copy these two files to the original installation, they should work, but might break if there are some bigger changes there in the future.
+
+
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/altryne/sd-webui-colab/blob/main/Stable_Diffusion_WebUi_Altryne.ipynb)
 
 # Installation instructions for [Windows](https://github.com/sd-webui/stable-diffusion-webui/wiki/Installation), [Linux](https://github.com/sd-webui/stable-diffusion-webui/wiki/Linux-Automated-Setup-Guide), or [Google Colab](https://colab.research.google.com/github/altryne/sd-webui-colab/blob/main/Stable_Diffusion_WebUi_Altryne.ipynb)
 
-### Have an **issue**? 
+### Have an **issue**?
 
 * If the issue involves _a bug_ in **textual-inversion** create the issue on **_[sd-webui/stable-diffusion-webui](https://github.com/sd-webui/stable-diffusion-webui)_**
 * If you want to know how to **activate** or **use** textual-inversion see **_[hlky/sd-enable-textual-inversion](https://github.com/hlky/sd-enable-textual-inversion)_**. Activation not working? create the issue on **_[sd-webui/stable-diffusion-webui](https://github.com/sd-webui/stable-diffusion-webui)_**
@@ -46,8 +56,8 @@ Features:
 
 * Gradio GUI: Idiot-proof, fully featured frontend for both txt2img and img2img generation
 * No more manually typing parameters, now all you have to do is write your prompt and adjust sliders
-* GFPGAN Face Correction 🔥: [Download the model](https://github.com/sd-webui/stable-diffusion-webui#gfpgan)Automatically correct distorted faces with a built-in GFPGAN option, fixes them in less than half a second 
-* RealESRGAN Upscaling 🔥: [Download the models](https://github.com/sd-webui/stable-diffusion-webui#realesrgan) Boosts the resolution of images with a built-in RealESRGAN option 
+* GFPGAN Face Correction 🔥: [Download the model](https://github.com/sd-webui/stable-diffusion-webui#gfpgan)Automatically correct distorted faces with a built-in GFPGAN option, fixes them in less than half a second
+* RealESRGAN Upscaling 🔥: [Download the models](https://github.com/sd-webui/stable-diffusion-webui#realesrgan) Boosts the resolution of images with a built-in RealESRGAN option
 * :computer: esrgan/gfpgan on cpu support :computer:
 * Textual inversion 🔥: [info](https://textual-inversion.github.io/) - requires enabling, see [here](https://github.com/hlky/sd-enable-textual-inversion), script works as usual without it enabled
 * Advanced img2img editor :art: :fire: :art:
@@ -80,11 +90,11 @@ Original script with Gradio UI was written by a kind anonymous user. This is a m
 
 If you want to use GFPGAN to improve generated faces, you need to install it separately.
 Download [GFPGANv1.3.pth](https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth) and put it
-into the `/stable-diffusion-webui/src/gfpgan/experiments/pretrained_models` directory. 
+into the `/stable-diffusion-webui/src/gfpgan/experiments/pretrained_models` directory.
 
 ### RealESRGAN
 Download [RealESRGAN_x4plus.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth) and [RealESRGAN_x4plus_anime_6B.pth](https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.2.4/RealESRGAN_x4plus_anime_6B.pth).
-Put them into the `stable-diffusion-webui/src/realesrgan/experiments/pretrained_models` directory. 
+Put them into the `stable-diffusion-webui/src/realesrgan/experiments/pretrained_models` directory.
 
 ### LDSR
 * Download **LDSR** [project.yaml](https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=1) and [ model last.cpkt](https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=1). Rename last.ckpt to model.ckpt and place both under stable-diffusion-webui/src/latent-diffusion/experiments/pretrained_models/
@@ -253,8 +263,8 @@ which is available on [GitHub](https://github.com/CompVis/latent-diffusion). PDF
 ![txt2img-stable2](assets/stable-samples/txt2img/merged-0006.png)
 [Stable Diffusion](#stable-diffusion-v1) is a latent text-to-image diffusion
 model.
-Thanks to a generous compute donation from [Stability AI](https://stability.ai/) and support from [LAION](https://laion.ai/), we were able to train a Latent Diffusion Model on 512x512 images from a subset of the [LAION-5B](https://laion.ai/blog/laion-5b/) database. 
-Similar to Google's [Imagen](https://arxiv.org/abs/2205.11487), 
+Thanks to a generous compute donation from [Stability AI](https://stability.ai/) and support from [LAION](https://laion.ai/), we were able to train a Latent Diffusion Model on 512x512 images from a subset of the [LAION-5B](https://laion.ai/blog/laion-5b/) database.
+Similar to Google's [Imagen](https://arxiv.org/abs/2205.11487),
 this model uses a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts.
 With its 860M UNet and 123M text encoder, the model is relatively lightweight and runs on a GPU with at least 10GB VRAM.
 See [this section](#stable-diffusion-v1) below and the [model card](https://huggingface.co/CompVis/stable-diffusion).
@@ -263,27 +273,27 @@ See [this section](#stable-diffusion-v1) below and the [model card](https://hugg
 
 Stable Diffusion v1 refers to a specific configuration of the model
 architecture that uses a downsampling-factor 8 autoencoder with an 860M UNet
-and CLIP ViT-L/14 text encoder for the diffusion model. The model was pretrained on 256x256 images and 
+and CLIP ViT-L/14 text encoder for the diffusion model. The model was pretrained on 256x256 images and
 then finetuned on 512x512 images.
 
 *Note: Stable Diffusion v1 is a general text-to-image diffusion model and therefore mirrors biases and (mis-)conceptions that are present
-in its training data. 
+in its training data.
 Details on the training procedure and data, as well as the intended use of the model can be found in the corresponding [model card](https://huggingface.co/CompVis/stable-diffusion).
 
-## Comments 
+## Comments
 
 - Our codebase for the diffusion models builds heavily on [OpenAI's ADM codebase](https://github.com/openai/guided-diffusion)
-and [https://github.com/lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch). 
+and [https://github.com/lucidrains/denoising-diffusion-pytorch](https://github.com/lucidrains/denoising-diffusion-pytorch).
 Thanks for open-sourcing!
 
-- The implementation of the transformer encoder is from [x-transformers](https://github.com/lucidrains/x-transformers) by [lucidrains](https://github.com/lucidrains?tab=repositories). 
+- The implementation of the transformer encoder is from [x-transformers](https://github.com/lucidrains/x-transformers) by [lucidrains](https://github.com/lucidrains?tab=repositories).
 
 
 ## BibTeX
 
 ```
 @misc{rombach2021highresolution,
-      title={High-Resolution Image Synthesis with Latent Diffusion Models}, 
+      title={High-Resolution Image Synthesis with Latent Diffusion Models},
       author={Robin Rombach and Andreas Blattmann and Dominik Lorenz and Patrick Esser and Björn Ommer},
       year={2021},
       eprint={2112.10752},
